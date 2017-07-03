@@ -9,8 +9,8 @@
 
 (def fs (js/require "fs"))
 
-(defn build-selector
-  "Build an eq-like selector"
+(defn ->selector
+  "Build an eq selector to be used by eq/select."
   [expr]
   (cond
     ;; "", "." -> identity
@@ -42,7 +42,7 @@
 
 (defn -main
   [expr & _]
-  (if-let [selector (build-selector expr)]
+  (if-let [selector (->selector expr)]
     (doseq [line (->> (. fs openSync "/dev/stdin" "rs")
                       line-seq
                       (map edn/read-string)
