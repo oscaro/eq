@@ -1,1 +1,2 @@
+#!/bin/sh
 lein doo node test-advanced

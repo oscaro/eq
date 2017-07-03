@@ -1,1 +1,2 @@
+#!/bin/sh
 lein cljsbuild auto none
