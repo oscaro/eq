@@ -5,6 +5,8 @@ powerful).
 
 ## Usage
 
+`eq` reads on `stdin` and takes an optional selector as its sole argument.
+
 ```sh
 # pretty-print each line
 cat *.edn | eq .
@@ -12,6 +14,13 @@ cat *.edn | eq .
 # pretty-print the :foo-bar value of each line
 cat *.edn | eq .foo-bar
 ```
+
+### Supported selectors
+
+* `.`: the object itself. This is identical to giving no selector at all.
+* `:foo`: Apply `:foo` to the current object.
+* `.foo`: Equivalent of `:foo` but `.foo.bar` is interpreted as `:foo` then
+  `:bar` instead of the `:foo.bar` keyword.
 
 ## Install
 
