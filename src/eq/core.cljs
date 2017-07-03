@@ -21,9 +21,15 @@
     (= (.indexOf expr ":") 0)
       (keyword (.substring expr 1))
 
-    ;; ".foo" = alias for ":foo"
-    (= (.lastIndexOf expr ".") 0)
-      (keyword (.substring expr 1))
+    ;; ".foo.bar" -> (-> :foo :bar)
+    (re-matches #"(?:\.[a-z][a-zA-Z0-9-]*)+" expr)
+      (let [kws (->> (cs/split (.substring expr 1) #"\.")
+                     (map keyword))]
+        (fn [o]
+          (reduce (fn [o kw]
+                    (get o kw))
+                  o
+                  kws)))
 
     :else
       ;identity
