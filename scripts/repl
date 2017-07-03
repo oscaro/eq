@@ -1,2 +1,3 @@
+#!/bin/sh
 echo -e "After this launches, run (load-file \"scripts/repl.clj\")"
-rlwrap -r -m -q '\\"' -b "(){}[],^%3@\\\";:'" lein repl
+rlwrap -r -m ' \ ' -q '\\"' -b "(){}[],^%3@\\\";:'" lein repl
