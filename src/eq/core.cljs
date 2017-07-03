@@ -10,12 +10,18 @@
 (def fs (js/require "fs"))
 
 (defn build-selector
+  "Build an eq-like selector"
   [expr]
   (cond
     ;; "", "." -> identity
     (or (nil? expr) (empty? expr) (= expr ".")) identity
 
-    ;; ".foo" -> :foo
+    ;; ":foo" -> :foo
+    ;; ":foo.bar" -> :foo.bar
+    (= (.indexOf expr ":") 0)
+      (keyword (.substring expr 1))
+
+    ;; ".foo" = alias for ":foo"
     (= (.lastIndexOf expr ".") 0)
       (keyword (.substring expr 1))
 
@@ -24,21 +30,26 @@
       nil
     ))
 
+(defn select
+  [selector xs]
+  (map selector xs))
+
 (defn -main
   [expr & _]
   (if-let [selector (build-selector expr)]
-      (doseq [line (->> (. fs openSync "/dev/stdin" "rs")
-                        line-seq)
-              :let [o (edn/read-string line)]]
-        ;; hacky way to avoid double-newlines
-        (println
-          (cs/replace
-            (with-out-str
-              (pprint/pprint (selector o)))
-            #"\n$" "")))
+    (doseq [line (->> (. fs openSync "/dev/stdin" "rs")
+                      line-seq
+                      (map edn/read-string)
+                      (select selector))]
+      ;; hacky way to avoid double-newlines
+      (println
+        (cs/replace
+          (with-out-str
+            (pprint/pprint line))
+          #"\n$" "")))
 
-      (do
-        (println "Unrecognized argument: " expr)
-        (.exit node/process 1))))
+    (do
+      (println "Unrecognized argument: " expr)
+      (.exit node/process 1))))
 
 (set! *main-cli-fn* -main) ; sends node's process.argv to -main
