@@ -26,9 +26,12 @@ cat *.edn | eq .foo-bar
 
 You need to have Node installed on your machine.
 
-1. Retrieve this project locally and run `./scripts/build-advanced`
+1. Retrieve this project locally and run `./scripts/build-advanced`. You can
+   also download `eq.js` from the [releases page][releases]
 2. `chmod u+x target/eq.js`
 3. Move `target/eq.js` somewhere in your `PATH`
+
+[releases]: https://github.com/oscaro/eq/releases
 
 ## License
 
