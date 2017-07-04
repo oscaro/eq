@@ -1,7 +1,12 @@
 # eq Changelog
 
-## 0.2.0 (2017/06/30)
+## 0.2.1 (2017/07/04)
 
-This release features a full rewrite of `eq` in ClojureScript/Node. The
-colors are gone (for now) but it runs a lot faster and the executable is 12x
-lighter.
+This is the first public release of `eq`.
+
+* Expose `eq.core/select`
+* Improve the documentation
+* Support more selectors: `.foo.bar` for `#(-> % :foo :bar)` and `:foo` for
+  simple keywords.
+* Extract I/O utilities from `eq.core` into `eq.io`
+* Add more tests

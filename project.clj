@@ -1,4 +1,4 @@
-(defproject eq "0.2.1-SNAPSHOT"
+(defproject eq "0.2.1"
   :description "Like jq, for EDN"
   :url "https://github.com/oscaro/eq"
   :license {:name "Eclipse Public License"
