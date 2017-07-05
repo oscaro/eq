@@ -33,6 +33,10 @@ You need to have Node installed on your machine.
 
 [releases]: https://github.com/oscaro/eq/releases
 
+### With [Homebrew](https://brew.sh/) on macOS
+
+    brew install bfontaine/utils/eq
+
 ## License
 
 Copyright © 2016-2017 Oscaro
