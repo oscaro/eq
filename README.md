@@ -5,7 +5,14 @@ powerful).
 
 ## Usage
 
-`eq` reads on `stdin` and takes an optional selector as its sole argument.
+```
+$ eq [selector [<path>]]
+```
+
+If no path is given, `eq` reads from `stdin`. The default selector is `.` (just
+like `jq`).
+
+### Examples
 
 ```sh
 # pretty-print each line
@@ -13,6 +20,9 @@ cat *.edn | eq .
 
 # pretty-print the :foo-bar value of each line
 cat *.edn | eq .foo-bar
+
+# read from a file
+eq .name people.edn
 ```
 
 ### Supported selectors
