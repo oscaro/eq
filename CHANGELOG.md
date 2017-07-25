@@ -1,5 +1,9 @@
 # eq Changelog
 
+## 0.2.2 (2017/07/25)
+
+* Add the ability to read from a file
+
 ## 0.2.1 (2017/07/04)
 
 This is the first public release of `eq`.
