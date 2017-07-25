@@ -54,7 +54,7 @@
           #"\n$" "")))
 
     (do
-      (println "Unrecognized argument: " expr)
+      (println "Unrecognized argument:" expr)
       (.exit node/process 1))))
 
 (set! *main-cli-fn* -main) ; sends node's process.argv to -main
