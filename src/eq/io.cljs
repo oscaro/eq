@@ -25,3 +25,8 @@
        (recur fd (str line chunk)))
      (when line
        (list line)))))
+
+(defn file-lines
+  [filepath]
+  (->> (. fs openSync (or filepath "/dev/stdin") "rs")
+          line-seq))

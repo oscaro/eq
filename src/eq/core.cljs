@@ -3,7 +3,7 @@
             [cljs.reader :as edn]
             [cljs.pprint :as pprint]
             [cljs.nodejs :as node]
-            [eq.io :refer [line-seq]]))
+            [eq.io :refer [file-lines]]))
 
 (node/enable-util-print!) ; allows (println ..) to print to console.log
 
@@ -41,10 +41,9 @@
   (map selector xs))
 
 (defn -main
-  [expr & _]
+  [expr filepath]
   (if-let [selector (->selector expr)]
-    (doseq [line (->> (. fs openSync "/dev/stdin" "rs")
-                      line-seq
+    (doseq [line (->> (file-lines filepath)
                       (map edn/read-string)
                       (select selector))]
       ;; hacky way to avoid double-newlines
